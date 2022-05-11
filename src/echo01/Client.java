@@ -9,7 +9,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class Client {
 
@@ -37,11 +36,20 @@ public class Client {
       BufferedReader br = new BufferedReader(isr);
       
       //스캐너
+      /*
       Scanner sc = new Scanner(System.in);
-       
+       */
+      InputStream in = System.in;
+      InputStreamReader sisr = new InputStreamReader(in, "UTF-8");
+      BufferedReader sbr = new BufferedReader(sisr);
+      
+      
       while(true) {
         //키보드입력
+    	  /*
     	  String str= sc.nextLine();
+    	  */
+    	  String str = sbr.readLine();
     	  
     	  if(str.equals("/q")) {
     		  break;
@@ -60,10 +68,20 @@ public class Client {
      
       
       System.out.println("==============================");
+     /*
       System.out.println("<클라이언트 종료>");
+      */
+      
+      OutputStream out = System.out;
+      OutputStreamWriter posw = new OutputStreamWriter(out, "UTF-8");
+      BufferedWriter pbw = new BufferedWriter(posw);
+      
+      pbw.write("클라이언트 종료");
+      pbw.newLine();
+      pbw.flush();
       
       
-      sc.close();
+     // sc.close();
       br.close();
       bw.close();
       socket.close();
